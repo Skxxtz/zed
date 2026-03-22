@@ -69,6 +69,57 @@ impl Rgba {
             }
         }
     }
+
+    /// Returns the modified [`RGBA`] color with the alpha channel set to the given value.
+    ///
+    /// Example:
+    /// ```
+    /// let color = rgba(1.0, 0.0, 0.0, 1.0);
+    /// let faded = color.alpha(0.25);
+    /// assert_eq!(faded.a, 0.25);
+    /// ```
+    ///
+    /// This will return a red color with 25% opacity.
+    ///
+    /// Example:
+    /// ```
+    /// let color = rgba(0.2, 0.6, 1.0, 0.8);
+    /// let transparent = color.alpha(0.0);
+    /// assert_eq!(transparent.a, 0.0);
+    /// ```
+    ///
+    /// This will return the same blue color, fully transparent.
+    pub fn alpha(mut self, alpha: f32) -> Self {
+        self.a = alpha.clamp(0.0, 1.0);
+        self
+    }
+
+    /// Returns the modified [`RGBA`] color with the same red, green, and blue channels,
+    /// but with the alpha channel multiplied by the given factor.
+    ///
+    /// The result is clamped to `[0.0, 1.0]`.
+    ///
+    /// Example:
+    /// ```
+    /// let color = rgba(1.0, 0.0, 0.0, 1.0); // Fully opaque red
+    /// let faded = color.with_alpha_scaled(0.5);
+    /// assert_eq!(faded.a, 0.5);
+    /// ```
+    ///
+    /// This will return a red color with 50% opacity.
+    ///
+    /// Example:
+    /// ```
+    /// let color = rgba(0.2, 0.6, 1.0, 0.8); // A light blue with 80% opacity
+    /// let faded = color.with_alpha_scaled(0.5);
+    /// assert!((faded.a - 0.4).abs() < 1e-6);
+    /// ```
+    ///
+    /// This will return the same blue color scaled down to 40% opacity.
+    pub fn opacity(mut self, alpha: f32) -> Self {
+        self.a = (self.a * alpha).clamp(0.0, 1.0);
+        self
+    }
 }
 
 impl From<Rgba> for u32 {
