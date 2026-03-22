@@ -1004,4 +1004,28 @@ mod tests {
         assert!(!background.is_transparent());
         assert!(background.opacity(0.0).is_transparent());
     }
+
+    #[test]
+    fn test_alpha() {
+        let color = Rgba {
+            r: 0.2,
+            g: 0.6,
+            b: 1.0,
+            a: 0.8,
+        };
+        assert_eq!(color.alpha(0.25).a, 0.25);
+        assert_eq!(color.alpha(1.5).a, 1.0);
+    }
+
+    #[test]
+    fn test_opacity() {
+        let color = Rgba {
+            r: 0.2,
+            g: 0.6,
+            b: 1.0,
+            a: 0.8,
+        };
+        assert!((color.opacity(0.5).a - 0.4).abs() < 1e-6);
+        assert_eq!(color.opacity(2.0).a, 1.0);
+    }
 }
