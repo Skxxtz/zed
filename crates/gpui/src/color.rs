@@ -89,8 +89,8 @@ impl Rgba {
     /// ```
     ///
     /// This will return the same blue color, fully transparent.
-    pub fn alpha(mut self, alpha: f32) -> Self {
-        self.a = alpha.clamp(0.0, 1.0);
+    pub fn alpha(mut self, a: f32) -> Self {
+        self.a = a.clamp(0.0, 1.0);
         self
     }
 
@@ -116,8 +116,8 @@ impl Rgba {
     /// ```
     ///
     /// This will return the same blue color scaled down to 40% opacity.
-    pub fn opacity(mut self, alpha: f32) -> Self {
-        self.a = (self.a * alpha).clamp(0.0, 1.0);
+    pub fn opacity(mut self, factor: f32) -> Self {
+        self.a = (self.a * factor).clamp(0.0, 1.0);
         self
     }
 }
