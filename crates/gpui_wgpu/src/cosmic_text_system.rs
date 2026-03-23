@@ -236,6 +236,8 @@ impl CosmicTextSystemState {
             let allowed_bad_font_names = [
                 "SegoeFluentIcons", // NOTE: Segoe fluent icons postscript name is inconsistent
                 "Segoe Fluent Icons",
+                "AppleColorEmoji",
+                "Apple Color Emoji",
             ];
 
             if font.as_swash().charmap().map('m') == 0
@@ -641,5 +643,5 @@ fn face_info_into_properties(
 
 fn check_is_known_emoji_font(postscript_name: &str) -> bool {
     // TODO: Include other common emoji fonts
-    postscript_name == "NotoColorEmoji"
+    postscript_name == "NotoColorEmoji" || postscript_name == "AppleColorEmoji"
 }
